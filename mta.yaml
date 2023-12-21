@@ -1,0 +1,23 @@
+ID: PDFScanner-countWords
+_schema-version: '3.1'
+version: 1.0.0
+modules:
+- name: PDFScanner-countWords
+  type: python
+  path: ./  
+  requires:
+  - name: PDFwordscount
+  parameters:
+    memory: 128M
+    disk-quota: 256M
+    command: python getCount.py
+    buildpack: python_buildpack
+    random-route: true
+resources:
+  - name: PDFwordscount
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service: xsuaa
+      service-name: PDFScannergetCount-oauth
+      service-plan: application
